@@ -1,0 +1,619 @@
+{
+  "source": "https://api.usesaferoute.com/openapi.json",
+  "observedAt": "2026-10-28",
+  "note": "Public schema excerpts, not observed paid responses. Consult live schema for changes.",
+  "products": {
+    "/v1/swap-safety-check": {
+      "type": "object",
+      "properties": {
+        "checkId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "status": {
+          "type": "string",
+          "const": "eligible"
+        },
+        "chainId": {
+          "type": "integer",
+          "const": 8453
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "pair": {
+          "type": "object",
+          "properties": {
+            "from": {
+              "type": "string",
+              "enum": [
+                "USDC",
+                "WETH",
+                "EURC",
+                "CBETH",
+                "CBBTC",
+                "VIRTUAL",
+                "AERO"
+              ]
+            },
+            "to": {
+              "type": "string",
+              "enum": [
+                "USDC",
+                "WETH",
+                "EURC",
+                "CBETH",
+                "CBBTC",
+                "VIRTUAL",
+                "AERO"
+              ]
+            },
+            "sellToken": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "buyToken": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            }
+          },
+          "required": [
+            "from",
+            "to",
+            "sellToken",
+            "buyToken"
+          ]
+        },
+        "amount": {
+          "type": "object",
+          "properties": {
+            "human": {
+              "type": "string"
+            },
+            "raw": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            },
+            "usdcEquivalentRaw": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            }
+          },
+          "required": [
+            "human",
+            "raw",
+            "usdcEquivalentRaw"
+          ]
+        },
+        "estimatedOutput": {
+          "type": "object",
+          "properties": {
+            "raw": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            },
+            "minimumRaw": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            }
+          },
+          "required": [
+            "raw"
+          ]
+        },
+        "tokenVerification": {
+          "type": "object",
+          "properties": {
+            "sellTokenApproved": {
+              "type": "boolean",
+              "const": true
+            },
+            "buyTokenApproved": {
+              "type": "boolean",
+              "const": true
+            },
+            "sellTokenDecimals": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "buyTokenDecimals": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "sellTokenApproved",
+            "buyTokenApproved",
+            "sellTokenDecimals",
+            "buyTokenDecimals"
+          ]
+        },
+        "liquidity": {
+          "type": "object",
+          "properties": {
+            "available": {
+              "type": "boolean",
+              "const": true
+            },
+            "sources": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "available",
+            "sources"
+          ]
+        },
+        "priceImpact": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "const": "checked_on_full_quote"
+            },
+            "warning": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "status",
+            "warning"
+          ]
+        },
+        "allowance": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "const": "wallet_required_for_check"
+            }
+          },
+          "required": [
+            "status"
+          ]
+        },
+        "expectedSafeRouteFee": {
+          "type": "object",
+          "properties": {
+            "bps": {
+              "type": "integer",
+              "const": 10
+            },
+            "amountRaw": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            },
+            "token": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "indicative": {
+              "type": "boolean",
+              "const": true
+            }
+          },
+          "required": [
+            "bps",
+            "amountRaw",
+            "token",
+            "indicative"
+          ]
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextAction": {
+          "type": "object",
+          "properties": {
+            "method": {
+              "type": "string",
+              "const": "POST"
+            },
+            "endpoint": {
+              "type": "string",
+              "format": "uri"
+            },
+            "price": {
+              "type": "string",
+              "const": "$0.01"
+            },
+            "requiredAdditionalField": {
+              "type": "string",
+              "const": "wallet"
+            }
+          },
+          "required": [
+            "method",
+            "endpoint",
+            "price",
+            "requiredAdditionalField"
+          ]
+        },
+        "attribution": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "sourceAgentId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "referralCode": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 64,
+              "pattern": "^[a-zA-Z0-9_-]+$"
+            },
+            "intentId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128,
+              "pattern": "^[a-zA-Z0-9_-]+$"
+            }
+          }
+        }
+      },
+      "required": [
+        "checkId",
+        "status",
+        "chainId",
+        "createdAt",
+        "expiresAt",
+        "pair",
+        "amount",
+        "estimatedOutput",
+        "tokenVerification",
+        "liquidity",
+        "priceImpact",
+        "allowance",
+        "expectedSafeRouteFee",
+        "warnings",
+        "nextAction"
+      ]
+    },
+    "/v1/quote": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "quoteId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "chainId": {
+          "type": "integer",
+          "const": 8453
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sellToken": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{40}$"
+        },
+        "buyToken": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{40}$"
+        },
+        "sellAmount": {
+          "type": "string",
+          "pattern": "^\\d+$"
+        },
+        "buyAmount": {
+          "type": "string",
+          "pattern": "^\\d+$"
+        },
+        "minBuyAmount": {
+          "type": "string",
+          "pattern": "^\\d+$"
+        },
+        "feeBps": {
+          "type": "integer",
+          "const": 10
+        },
+        "feeAmount": {
+          "type": "string",
+          "pattern": "^\\d+$"
+        },
+        "feeToken": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{40}$"
+        },
+        "executionMode": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "gasless"
+          ]
+        },
+        "usdNotional": {
+          "type": "string",
+          "pattern": "^\\d+$"
+        },
+        "approvalRequired": {
+          "type": "boolean"
+        },
+        "taker": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{40}$"
+        },
+        "approvalSpender": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{40}$"
+        },
+        "payloadHash": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{64}$"
+        },
+        "transactionDataHash": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{64}$"
+        },
+        "transaction": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "to": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "data": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]*$"
+            },
+            "value": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            },
+            "gas": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            },
+            "gasPrice": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            }
+          },
+          "required": [
+            "to",
+            "data",
+            "value"
+          ]
+        },
+        "gasless": {
+          "type": "object",
+          "properties": {
+            "trade": {
+              "type": "object"
+            },
+            "target": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "relaySubmitEndpoint": {
+              "type": "string",
+              "format": "uri"
+            },
+            "relayRequiresBuyerZeroXApiKey": {
+              "type": "boolean",
+              "const": true
+            },
+            "buyerMustSignAndSubmit": {
+              "type": "boolean",
+              "const": true
+            }
+          },
+          "required": [
+            "trade",
+            "target",
+            "relaySubmitEndpoint",
+            "relayRequiresBuyerZeroXApiKey",
+            "buyerMustSignAndSubmit"
+          ]
+        },
+        "simulation": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "passed",
+                "skipped",
+                "failed"
+              ]
+            },
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "status"
+          ]
+        },
+        "receipt": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "quoteId": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "chainId": {
+              "type": "integer",
+              "const": 8453
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "expiresAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "sellToken": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "buyToken": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "sellAmount": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            },
+            "buyAmount": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            },
+            "taker": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "executionMode": {
+              "type": "string",
+              "enum": [
+                "standard",
+                "gasless"
+              ]
+            },
+            "usdcNotional": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            },
+            "feeBps": {
+              "type": "integer",
+              "const": 10
+            },
+            "feeRecipient": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "feeAmount": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            },
+            "feeToken": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "payloadHash": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{64}$"
+            },
+            "transactionTo": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "transactionValue": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            },
+            "gaslessTarget": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "attribution": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "sourceAgentId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "referralCode": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 64,
+                  "pattern": "^[a-zA-Z0-9_-]+$"
+                },
+                "intentId": {
+                  "type": "string",
+                  "minLength": 16,
+                  "maxLength": 128,
+                  "pattern": "^[a-zA-Z0-9_-]+$"
+                }
+              }
+            }
+          },
+          "required": [
+            "quoteId",
+            "chainId",
+            "createdAt",
+            "expiresAt",
+            "sellToken",
+            "buyToken",
+            "sellAmount",
+            "buyAmount",
+            "taker",
+            "executionMode",
+            "usdcNotional",
+            "feeBps",
+            "feeRecipient",
+            "payloadHash"
+          ]
+        },
+        "receiptSignature": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "inputFormat": {
+          "type": "string",
+          "enum": [
+            "simple",
+            "advanced"
+          ]
+        }
+      },
+      "required": [
+        "quoteId",
+        "chainId",
+        "createdAt",
+        "expiresAt",
+        "sellToken",
+        "buyToken",
+        "sellAmount",
+        "buyAmount",
+        "feeBps",
+        "executionMode",
+        "usdNotional",
+        "approvalRequired",
+        "taker",
+        "payloadHash",
+        "simulation",
+        "receipt",
+        "receiptSignature",
+        "inputFormat"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "transaction"
+          ]
+        },
+        {
+          "required": [
+            "gasless"
+          ]
+        }
+      ]
+    }
+  }
+}

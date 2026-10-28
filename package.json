@@ -1,0 +1,15 @@
+{
+  "name": "saferoute-agent-tools",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "SafeRoute Base swap skill, unpaid inspection demos, and caller-controlled integration recipes",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test",
+    "demo": "node skills/saferoute-base-swap/scripts/inspect.mjs",
+    "demo:quote": "node examples/inspect-quote.mjs"
+  }
+}
