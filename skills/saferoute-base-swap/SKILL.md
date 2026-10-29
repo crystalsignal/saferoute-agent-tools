@@ -1,6 +1,7 @@
 ---
 name: saferoute-base-swap
-description: Inspect a SafeRoute Base swap safety check or request a wallet-bound quote for supported tokens using x402. Use for a Base swap preflight or SafeRoute API evaluation; signing and trade execution stay with the caller.
+description: Inspect supported Base USDC/WETH swap eligibility or request a SafeRoute quote via x402. Payment needs the operator's approved client and budget.
+metadata: {"openclaw":{"requires":{"bins":["node"]}}}
 ---
 
 # SafeRoute Base swap check
@@ -12,10 +13,10 @@ Start with a wallet-free eligibility check for an approved-token pair. The safet
 Run the bundled Node.js 22+ demo:
 
 ```sh
-node scripts/inspect.mjs
+node "{baseDir}/scripts/inspect.mjs"
 ```
 
-Resolve the script relative to this skill directory. It makes one unpaid POST with USDC/WETH and amount 1, verifies the expected 402 challenge, Base network, canonical USDC, merchant and exact 0.001 price, then stops. No wallet or dependencies are needed for inspection. The command-line demo has no paid mode. Read the script before use.
+Resolve `{baseDir}` to this skill directory. It makes one unpaid POST with USDC/WETH and amount 1, verifies the expected 402 challenge, Base network, canonical USDC, merchant and exact 0.001 price, then stops. No wallet or dependencies are needed for inspection. The command-line demo has no paid mode. Read the script before use.
 
 ## Evaluate with the operator’s existing payment client
 
